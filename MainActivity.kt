@@ -1,319 +1,210 @@
-package com.example.no2_vp_week2.soal1
+package com.example.no2_vp_week2.soal2
 
-
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.ui.unit.dp
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.MoreHoriz
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.filled.SkipPrevious
-import androidx.compose.material.icons.filled.SkipNext
-import androidx.compose.material.icons.filled.Pause
-import androidx.compose.ui.Alignment
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.no2_vp_week2.R
-import com.example.no2_vp_week2.ui.theme.No2_VP_Week2Theme
+import androidx.compose.material3.Text
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.Font
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.ui.text.TextStyle
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            No2_VP_Week2Theme {
-                LaguTulus()
-            }
-        }
-    }
-}
+val Poppins = FontFamily(
+    Font(R.font.poppins_regular, FontWeight.Normal),
+    Font(R.font.poppins_regular, FontWeight.Bold))
 
 @Composable
-fun LaguTulus(modifier : Modifier = Modifier){
-    Scaffold(
-        modifier = modifier.fillMaxSize(),
-        containerColor = Color(0xFF1565C0)
-    ) { innerPadding ->
+fun screen(){
+    var text1 by remember { mutableStateOf("") }
+    var text2 by remember { mutableStateOf("") }
+    var text3 by remember { mutableStateOf("") }
+    val card = Color(0xFF333852)
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Blue)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.padar_island),
+            contentDescription = "Background Padar",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+        )
         Column(
             modifier = Modifier
-                .padding(innerPadding)
-                .padding(horizontal = 40.dp)
-                .fillMaxHeight()
-        ){
-          Row(
-              modifier = Modifier
-                  .fillMaxWidth()
-                  .padding(top = 24.dp, bottom = 8.dp),
-              horizontalArrangement = Arrangement.SpaceBetween,
-              verticalAlignment = Alignment.CenterVertically
-          ) {
-              IconButton(onClick = {}){
-                  Icon(
-                      imageVector = Icons.Default.KeyboardArrowDown,
-                      contentDescription = "Tutup"
-                  )
-              }
-              Text(
-                  text = "Liked Songs",
-                  style = MaterialTheme.typography.titleMedium,
-                  color = Color.White,
-                  fontWeight = FontWeight.Bold
-              )
-              IconButton(onClick = {}){
-                  Icon(
-                      imageVector = Icons.Default.MoreHoriz,
-                      contentDescription = "Menu"
-                  )
-              }
-          }
-            AlbumTulus(
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            JudulLagu(
-                modifier = Modifier.padding(top = 24.dp)
-            )
-            ProgressLagu(
-                modifier = Modifier.padding(top = 24.dp)
-            )
-            PlayerControls(
-                modifier = Modifier.padding(top = 8.dp)
-            )
-            LirikLagu(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(top = 8.dp)
-            )
-        }
-    }
-}
-
-@Composable
-fun AlbumTulus(modifier : Modifier = Modifier){
-    Column(
-        modifier = modifier
-    ){
-        Image(
-            painter = painterResource(id = R.drawable.jatuhsuka),
-            contentDescription = "jatuhsuka",
-            contentScale = ContentScale.Crop,
-            modifier = modifier
                 .fillMaxWidth()
-                .aspectRatio(1f)
-                .clip(RoundedCornerShape(5.dp))
-                .border(
-                    width = 3.dp,
-                    color = Color.White,
-                    shape  = RoundedCornerShape(5.dp)
-                )
-        )
+                .fillMaxHeight(0.65f)
+                .align(Alignment.BottomCenter)
+                .clip(RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
+                .background(card)
+                .padding(all=14.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ){
+            val star = Color(0xFFFFB800)
 
-    }
-}
-
-@Composable
-fun JudulLagu(modifier : Modifier = Modifier){
-    Row(
-        modifier = modifier
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ){
-        Column {
             Text(
-                text = "Jatuh Suka",
-                style = MaterialTheme.typography.headlineSmall,
+                text = "My Travel",
+                fontFamily = Poppins,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
-            Text(
-                text = "Tulus",
-                style = MaterialTheme.typography.titleMedium,
-                color = Color.White
-            )
-        }
-        IconButton(onClick = {}) {
-            Icon(
-                imageVector = Icons.Default.Favorite,
-                contentDescription = "Favorite",
-                tint = Color.White,
+                fontSize = 24.sp,
+                color =  Color.White,
                 modifier = Modifier
-                    .size(35.dp)
+                    .fillMaxWidth()
+                    .wrapContentWidth(Alignment.CenterHorizontally)
             )
-        }
-    }
-}
+            Spacer(modifier = Modifier.height(20.dp))
 
-@Composable
-fun ProgressLagu(modifier : Modifier){
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-    ){
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(2.dp)
-                .background(Color.Black)
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ){
             Text(
-                text = "0:12",
-                style = MaterialTheme.typography.bodySmall,
-                color = Color.Black
+                text = "Sky",
+                fontFamily = Poppins,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color =  Color.White
             )
-            Text(
-                text = "-2:14",
-                style = MaterialTheme.typography.bodySmall,
-                color = Color.Black
-            )
-        }
-    }
-}
+            Spacer(modifier = Modifier.height(4.dp))
 
-@Composable
-fun PlayerControls(modifier : Modifier = Modifier){
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
-    ){
-        IconButton(onClick = {}){
-            Icon(
-                imageVector = Icons.Default.SkipPrevious,
-                contentDescription = "Previous",
-                tint = Color.Black,
-                modifier = Modifier.size(36.dp)
+            Text(
+                text = "Padar Island",
+                fontFamily = Poppins,
+                fontWeight = FontWeight.Normal,
+                fontSize = 14.sp,
+                color = Color.White.copy(alpha = 0.8f)
             )
-        }
-        Box(
-            modifier = Modifier
-                .size(64.dp)
-                .clip(CircleShape)
-                .background(Color.Black),
-            contentAlignment = Alignment.Center
-        ){
-            IconButton(onClick = {}){
-                Icon(
-                    imageVector = Icons.Default.Pause,
-                    contentDescription = "Play/Pause",
-                    tint = Color.White,
-                    modifier = Modifier.size(32.dp)
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                repeat(5){
+                    Icon(
+                        imageVector = Icons.Filled.Star,
+                        contentDescription = null,
+                        tint = star,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Text(
+                    text = "5.0",
+                    fontFamily = Poppins,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp,
+                    color = Color.White
                 )
             }
-        }
-        IconButton(onClick = {}){
-            Icon(
-                imageVector = Icons.Default.SkipNext,
-                contentDescription = "Next",
-                tint = Color.Black,
-                modifier = Modifier.size(36.dp)
+            Spacer(modifier = Modifier.height(20.dp))
+
+            text(
+                value = text1,
+                onValueChange = {text1 =it},
+                placeholder = "What did you enjoy, ost about your trip?"
             )
+            Spacer(modifier = Modifier.height(20.dp))
+
+            text(
+                value = text2,
+                onValueChange = {text2 =it},
+                placeholder = "What was your favorite spot?"
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+
+            text(
+                value = text3,
+                onValueChange = {text3 =it},
+                placeholder = "Anything else you'd like to add?"
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.BottomEnd
+            ){
+                FloatingActionButton(
+                    onClick = { },
+                    containerColor = Color(0xFFD6E3F3),
+                    contentColor = Color.Black,
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.size(48.dp)
+                ){
+                    Icon(
+                      imageVector = Icons.Default.Add,
+                        contentDescription = "Add"
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
-fun LirikLagu(modifier : Modifier = Modifier){
-    Column(
-        modifier = modifier
+fun text(
+    value : String,
+    onValueChange : (String) -> Unit,
+    placeholder : String
+){
+    val bg = Color(0xFFD6E3F3)
+
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        placeholder = {
+            Text(
+                text = placeholder,
+                fontFamily = Poppins,
+                fontSize = 12.sp,
+                color = Color(0xFF6E788B)
+            )
+        },
+        textStyle = TextStyle(
+            fontFamily = Poppins,
+            fontSize = 12.sp,
+            color = Color.Black
+        ),
+        singleLine = true,
+        shape = RoundedCornerShape(10.dp),
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = bg,
+            unfocusedContainerColor = bg,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
+        ),
+        modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
-            .clip(
-                RoundedCornerShape(
-                    topStart = 20.dp,
-                    topEnd = 20.dp
-                )
-            )
-            .background(Color(0xFFA9A9A9))
-            .padding(20.dp)
-            .verticalScroll(rememberScrollState())
-    ){
-        Text(
-            text = "Sungguh ku tidak memiliki daya\n" +
-                    "Di depan harummu\n" +
-                    "Sungguh terkunci kata yang tertata\n" +
-                    "Di depan ragamu\n" +
-                    "Hu\n" +
-                    "Bila kau lihat ku tanpa sengaja\n" +
-                    "Beginikah surga\n" +
-                    "Bayangkan bila kau ajakku bicara\n" +
-                    "Ini semua bukan salahmu\n" +
-                    "Punya magis perekat yang sekuat itu\n" +
-                    "Dari lahir sudah begitu\n" +
-                    "Maafkan\n" +
-                    "Aku jatuh suka\n" +
-                    "Bila kau lihat ku tanpa sengaja\n" +
-                    "Hu\n" +
-                    "Beginikah surga\n" +
-                    "Bayangkan bila kau ajakku bicara\n" +
-                    "Ini semua bukan salahmu\n" +
-                    "Punya magis perekat yang sekuat itu\n" +
-                    "Dari lahir sudah begitu\n" +
-                    "Maafkan\n" +
-                    "Aku jatuh suka\n" +
-                    "Bila kau berkenan biarkanku di sampingmu\n" +
-                    "Berkuranglah satu jiwa yang sepi\n" +
-                    "Ini semua bukan salahmu\n" +
-                    "Punya magis perekat yang sekuat itu\n" +
-                    "Dari lahir sudah begitu\n" +
-                    "Maafkan oh uh\n" +
-                    "Ini semua bukan salahmu\n" +
-                    "Punya magis perekat yang sekuat itu\n" +
-                    "Dari lahir sudah begitu\n" +
-                    "Maafkan\n" +
-                    "Aku jatuh suka hm\n" +
-                    "Aku jatuh suka",
-            style = MaterialTheme.typography.bodyLarge,
-            color = Color.Black.copy(alpha = 0.85f),
-            lineHeight = 28.sp
-        )
-    }
+            .height(52.dp)
+    )
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
+
 @Composable
-fun LaguTulusPreview() {
-    No2_VP_Week2Theme {
-        LaguTulus()
-    }
+fun screenPreview(){
+    screen()
 }
